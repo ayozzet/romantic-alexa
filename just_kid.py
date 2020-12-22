@@ -3,7 +3,8 @@ import pyttsx3
 import pywhatkit
 import datetime
 import wikipedia
-#import pyjokes
+import pyjokes
+import time
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -30,7 +31,6 @@ def take_command():
         pass
     return command
 
-
 def run_alexa():
     command = take_command()
     print(command)
@@ -40,11 +40,14 @@ def run_alexa():
         pywhatkit.playonyt(song)
     elif 'time' in command:
         time = datetime.datetime.now().strftime('%I:%M %p')
+        talk('again?')
         talk('Current time is ' + time)
+        seconds = time.time()
+
     elif 'who the heck is' in command:
-        person = command.replace('who the heck is', '')
+        person = command.replace('who the heck is ', ' ')
         info = wikipedia.summary(person, 1)
-        print(info)
+        print(time)
         talk(info)
     elif 'date' in command:
         talk('sorry, I have a headache')
@@ -52,9 +55,18 @@ def run_alexa():
         talk('I am in a relationship with wifi')
     elif 'joke' in command:
         talk(pyjokes.get_joke())
-    else:
-        talk('Please say the command again.')
+    elif 'my car' in command:
+        talk(pyjokes,getjokes())
+    elif 'who is my star' in command:
+        talk('your special girlfriend')
+    elif 'open my camera' in command:
+        talk('i don\'\t know how to do that')
+        talk('im sorry')
+        print("sorry")
+    else:talk('Please say the command again.')
 
 
 while True:
+
     run_alexa()
+#© 2020 GitHub, Inc.
